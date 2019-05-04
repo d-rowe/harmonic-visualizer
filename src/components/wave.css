@@ -1,11 +1,15 @@
 path {
   stroke: hsl(204, 86%, 53%);
-  stroke-width: 5px;
+  stroke-width: 3px;
   stroke-linecap: round;
   fill: none;
 }
 
-.contain, svg {
+circle {
+  fill: hsl(204, 67%, 65%);
+}
+
+svg {
   width: 100%;
-  height: 100%;
+  height: 115px;
 }
