@@ -14,7 +14,7 @@ class Wave extends React.Component {
     this.resolution = 5;
     this.color = "hsl(204, 86%, 53%)";
     this.osc = new Tone.Oscillator(261.63 * this.harmonic).toMaster();
-    this.osc.volume.value = -10;
+    this.osc.volume.value = -20;
   }
 
   draw() {

@@ -33,3 +33,13 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar-item.navbar-center {
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navbar {
+  margin-bottom: 1em;
+}

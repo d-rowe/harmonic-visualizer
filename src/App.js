@@ -6,7 +6,16 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <h1 class="title has-text-centered">harmonic series</h1>
+      <nav className="navbar is-black">
+        <div className="container">
+          <div className="navbar-brand">
+            <a className="navbar-item navbar-center subtitle">
+              harmonic series
+            </a>
+          </div>
+        </div>
+      </nav>
+      {/* <h1 className="title has-text-centered">harmonic series</h1> */}
       <div className="App" id="App">
         <Wave harmonic="1" />
         <Wave harmonic="2" />
@@ -18,8 +27,6 @@ function App() {
         <Wave harmonic="8" />
         <Wave harmonic="9" />
         <Wave harmonic="10" />
-        <Wave harmonic="11" />
-        <Wave harmonic="12" />
       </div>
     </div>
   );
