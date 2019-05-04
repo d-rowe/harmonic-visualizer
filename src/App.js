@@ -17,6 +17,9 @@ function App() {
         <Wave harmonic="7" />
         <Wave harmonic="8" />
         <Wave harmonic="9" />
+        <Wave harmonic="10" />
+        <Wave harmonic="11" />
+        <Wave harmonic="12" />
       </div>
     </div>
   );

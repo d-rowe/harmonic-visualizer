@@ -1,16 +1,20 @@
 import React from "react";
 import { TweenMax, Power1 } from "gsap/TweenMax";
 import { TimelineMax } from "gsap/TimelineMax";
+import Tone from "tone";
 import "./wave.css";
 
 class Wave extends React.Component {
   constructor(props) {
     super(props);
-    this.amplitude = 50;
+    this.amplitude = 30;
     this.amplitudeAnimation = this.amplitude;
     this.harmonic = this.props.harmonic;
     this.speed = 3;
     this.resolution = 5;
+    this.color = "hsl(204, 86%, 53%)";
+    this.osc = new Tone.Oscillator(261.63 * this.harmonic).toMaster();
+    this.osc.volume.value = -10;
   }
 
   draw() {
@@ -19,12 +23,13 @@ class Wave extends React.Component {
     for (var i = 0; i <= this.width; i = i + this.resolution) {
       let x = i;
       let y =
-        60 +
+        40 +
         this.amplitudeAnimation *
           Math.sin(x / (this.width / (Math.PI * this.harmonic)));
       path = path.concat(x + "," + y + " L");
     }
     this.refs.path.setAttribute("d", path);
+    this.refs.path.setAttribute("stroke", this.color);
   }
 
   componentWillUnmount() {
@@ -32,6 +37,7 @@ class Wave extends React.Component {
   }
 
   componentDidMount() {
+    this.refs.path.setAttribute("stroke", "hsl(204, 86%, 53%)");
     window.addEventListener("resize", this.drawNodes.bind(this));
     this.draw();
     this.drawNodes();
@@ -66,8 +72,8 @@ class Wave extends React.Component {
           "circle"
         );
         circle.setAttribute("cx", (this.width / this.harmonic) * i);
-        circle.setAttribute("cy", 60);
-        circle.setAttribute("r", 5);
+        circle.setAttribute("cy", 40);
+        circle.setAttribute("r", 4);
         circles.push(circle);
       }
       for (let i = 0; i < circles.length; i++) {
@@ -76,13 +82,28 @@ class Wave extends React.Component {
     }
   }
 
+  hover = () => {
+    this.color = "red";
+    this.osc.start();
+  };
+
+  leave = () => {
+    this.color = "hsl(204, 86%, 53%)";
+    this.osc.stop();
+  };
+
   render() {
     return (
       <div className="side">
         <div className="vcenter">
-          <h1 class="title">{this.harmonic}</h1>
+          <h2 class="subtitle">{this.harmonic}</h2>
         </div>
-        <div className="contain" ref="contain">
+        <div
+          className="contain"
+          ref="contain"
+          onMouseEnter={this.hover}
+          onMouseLeave={this.leave}
+        >
           <svg ref="svg">
             <path ref="path" d="M10,10 L50,100 L90,50" />
           </svg>
