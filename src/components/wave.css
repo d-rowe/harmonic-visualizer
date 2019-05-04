@@ -13,3 +13,20 @@ svg {
   width: 100%;
   height: 115px;
 }
+
+.side {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.contain {
+  width: 100%;
+}
+
+.vcenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem;
+}
