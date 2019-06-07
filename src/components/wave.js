@@ -13,12 +13,24 @@ class Wave extends React.Component {
     this.speed = 3;
     this.resolution = 5;
     this.color = "hsl(204, 86%, 53%)";
-    this.osc = new Tone.Oscillator(261.63 * this.harmonic).toMaster();
-    this.osc.volume.value = -20;
+    this.fill = "hsl(204, 67%, 65%)";
+    this.frequency = 116.54 * this.harmonic;
+    this.osc = new Tone.Synth({
+      oscillator: {
+        type: "square"
+      },
+      envelope: {
+        attack: 0.01,
+        decay: 0.1,
+        sustain: 0.3,
+        release: 1
+      }
+    }).toMaster();
+    this.osc.volume.value = -15;
   }
 
   draw() {
-    this.width = this.refs.contain.clientWidth;
+    this.width = this.refs.harmonic.clientWidth;
     let path = "M";
     for (var i = 0; i <= this.width; i = i + this.resolution) {
       let x = i;
@@ -30,17 +42,21 @@ class Wave extends React.Component {
     }
     this.refs.path.setAttribute("d", path);
     this.refs.path.setAttribute("stroke", this.color);
+    this.refs.path.setAttribute("fill", this.fill);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.drawNodes.bind(this));
+    // window.removeEventListener("resize", this.drawNodes.bind(this));
+    this.osc.triggerRelease();
+    this.wtl.stop();
   }
 
   componentDidMount() {
     this.refs.path.setAttribute("stroke", "hsl(204, 86%, 53%)");
-    window.addEventListener("resize", this.drawNodes.bind(this));
+    this.refs.path.setAttribute("fill", "hsl(204, 67%, 65%)");
+    // window.addEventListener("resize", this.drawNodes.bind(this));
     this.draw();
-    this.drawNodes();
+    // this.drawNodes();
     this.wtl = new TimelineMax({ repeat: -1 });
     this.wtl.add(
       TweenMax.to(this, 1, {
@@ -61,6 +77,7 @@ class Wave extends React.Component {
       })
     );
     this.wtl.duration(this.speed * (1 / this.harmonic));
+    // this.wtl.duration(this.speed / 5);
   }
 
   drawNodes() {
@@ -84,28 +101,30 @@ class Wave extends React.Component {
 
   hover = () => {
     this.color = "red";
-    this.osc.start();
+    this.fill = "lightcoral";
+    this.osc.triggerAttack(this.frequency);
   };
 
   leave = () => {
     this.color = "hsl(204, 86%, 53%)";
-    this.osc.stop();
+    this.fill = "hsl(204, 67%, 65%)";
+    this.osc.triggerRelease();
   };
 
   render() {
     return (
       <div className="side">
         <div className="vcenter">
-          <h2 class="subtitle">{this.harmonic}</h2>
+          <h2 className="subtitle">{this.harmonic}</h2>
         </div>
         <div
           className="contain"
-          ref="contain"
+          ref="harmonic"
           onMouseEnter={this.hover}
           onMouseLeave={this.leave}
         >
           <svg ref="svg">
-            <path ref="path" d="M10,10 L50,100 L90,50" />
+            <path ref="path" className="sinepath" d="M10,10 L50,100 L90,50" />
           </svg>
         </div>
       </div>
