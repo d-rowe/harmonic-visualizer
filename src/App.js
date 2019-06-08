@@ -5,10 +5,11 @@ import "./App.css";
 
 function App() {
   return (
-    <section className="hero is-white is-fullheight">
+    <section className="hero is-light is-fullheight">
       <div className="hero-head">
-        <h2 className="subtitle is-4 has-text-centered">harmonic series</h2>
         <div className="container">
+          <br />
+          <h2 className="subtitle is-4 has-text-centered">Harmonic Series</h2>
           <content>
             The harmonic series represent the naturally occurring pitches that
             can be created on an open string or tube. These intervals can be
@@ -35,7 +36,7 @@ function App() {
       </div>
       <div className="hero-footer has-text-centered">
         <p>
-          &copy; 2019 <a href="https://danielrowetech.com">daniel rowe</a>
+          &copy; 2019 <a href="https://danielrowetech.com">Daniel Rowe</a>
         </p>
       </div>
     </section>
