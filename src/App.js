@@ -4,6 +4,7 @@ import "bulma/css/bulma.css";
 import "./App.css";
 
 function App() {
+  const numWaves = 8;
   return (
     <section className="hero is-light is-fullheight">
       <div className="hero-head">
@@ -22,15 +23,9 @@ function App() {
       <div className="hero-body">
         <div className="container">
           <div id="Harmonic">
-            <Wave harmonic="1" />
-            <Wave harmonic="2" />
-            <Wave harmonic="3" />
-            <Wave harmonic="4" />
-            <Wave harmonic="5" />
-            <Wave harmonic="6" />
-            <Wave harmonic="7" />
-            <Wave harmonic="8" />
-            {/* <Wave harmonic="9" /> */}
+            {[...Array(numWaves).keys()].map(i => (
+              <Wave harmonic={i + 1} />
+            ))}
           </div>
         </div>
       </div>

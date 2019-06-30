@@ -46,7 +46,6 @@ class Wave extends React.Component {
   }
 
   componentWillUnmount() {
-    // window.removeEventListener("resize", this.drawNodes.bind(this));
     this.osc.triggerRelease();
     this.wtl.stop();
   }
@@ -54,9 +53,7 @@ class Wave extends React.Component {
   componentDidMount() {
     this.refs.path.setAttribute("stroke", "hsl(204, 86%, 53%)");
     this.refs.path.setAttribute("fill", "hsl(204, 67%, 65%)");
-    // window.addEventListener("resize", this.drawNodes.bind(this));
     this.draw();
-    // this.drawNodes();
     this.wtl = new TimelineMax({ repeat: -1 });
     this.wtl.add(
       TweenMax.to(this, 1, {
