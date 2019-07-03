@@ -3,7 +3,7 @@ import Wave from "./components/wave";
 import "bulma/css/bulma.css";
 import "./App.css";
 
-function App() {
+const App = () => {
   const numWaves = 8;
   return (
     <section className="hero is-light is-fullheight">
@@ -15,8 +15,8 @@ function App() {
             The harmonic series represent the naturally occurring pitches that
             can be created on an open string or tube. These intervals can be
             found in the partials on brass instruments or harmonics of string
-            instruments and are the basis for our musical system. Hover over any
-            wave to hear it.
+            instruments and are the basis for our musical system. Click on any
+            wave to hear it, click again to stop it.
           </content>
         </div>
       </div>

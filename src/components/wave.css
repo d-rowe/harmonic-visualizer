@@ -28,7 +28,7 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   /* white-space: nowrap; */
-  width: 1.5em;
+  /* width: 1.5em; */
 }

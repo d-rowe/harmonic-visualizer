@@ -7,6 +7,7 @@ import "./wave.css";
 class Wave extends React.Component {
   constructor(props) {
     super(props);
+    this.active = false;
     this.amplitude = 30;
     this.amplitudeAnimation = this.amplitude;
     this.harmonic = this.props.harmonic;
@@ -96,16 +97,24 @@ class Wave extends React.Component {
     }
   }
 
-  hover = () => {
-    this.color = "red";
-    this.fill = "lightcoral";
-    this.osc.triggerAttack(this.frequency);
+  click = () => {
+    this.active ? this.stop() : this.play();
   };
 
-  leave = () => {
+  play = () => {
+    if (!this.active) {
+      this.color = "red";
+      this.fill = "lightcoral";
+      this.osc.triggerAttack(this.frequency);
+      this.active = true;
+    }
+  };
+
+  stop = () => {
     this.color = "hsl(204, 86%, 53%)";
     this.fill = "hsl(204, 67%, 65%)";
     this.osc.triggerRelease();
+    this.active = false;
   };
 
   render() {
@@ -117,8 +126,9 @@ class Wave extends React.Component {
         <div
           className="contain"
           ref="harmonic"
-          onMouseEnter={this.hover}
-          onMouseLeave={this.leave}
+          // onMouseEnter={this.play}
+          // onMouseLeave={this.stop}
+          onClick={this.click}
         >
           <svg ref="svg">
             <path ref="path" className="sinepath" d="M10,10 L50,100 L90,50" />
